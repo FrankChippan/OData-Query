@@ -8,30 +8,30 @@ Quickly create strings which comply with OData conventions.
 Create a simple list query
 
 ```objective-c
-NSString *listString = [NSString listStringWithBuilderBlock:^(ODataListStringBuilder *builderBlock) {
+NSString *listString = [NSString listWithBlock:^(ODataList *builderBlock) {
 builderBlock.name = @"staff";
 }];
 
-NSString *queryString = [NSString queryStringWithBuilderBlock:^(ODataQueryStringBuilder *builderBlock) {
+NSString *queryString = [NSString queryWithBlock:^(ODataQuery *builderBlock) {
 builderBlock.protocol = @"http";
 builderBlock.server = @"server";
 builderBlock.siteURL = @"siteurl";
 builderBlock.list = listString;
 }];
 
-http://server/siteurl/_vti_bin/ListData.svc/staff  
+staff  
 ```
 
 Create a select query
 
 ```objective-c
-NSString *listString = [NSString listStringWithBuilderBlock:^(ODataListStringBuilder *builderBlock) {
+NSString *listString = [NSString listWithBlock:^(ODataList *builderBlock) {
 builderBlock.name = @"staff";
 builderBlock.identifier = @"1";
 builderBlock.property = @"name";
 }];
 
-NSString *queryString = [NSString queryStringWithBuilderBlock:^(ODataQueryStringBuilder *builderBlock) {
+NSString *queryString = [NSString queryWithBlock:^(ODataQuery *builderBlock) {
 builderBlock.protocol = @"http";
 builderBlock.server = @"server";
 builderBlock.siteURL = @"siteurl";
@@ -39,47 +39,47 @@ builderBlock.list = listString;
 builderBlock.select = @[@"name", @"surname", @"age"];
 }];
 
-http://server/siteurl/_vti_bin/ListData.svc/staff(1)/name?$select=name,surname,age
+staff(1)/name?$select=name,surname,age
 ```
 
 Create a filter query 
 
 ```objective-c
-NSString *listString = [NSString listStringWithBuilderBlock:^(ODataListStringBuilder *builderBlock) {
+NSString *listString = [NSString listWithBlock:^(ODataList *builderBlock) {
 builderBlock.name = @"staff";
 builderBlock.identifier = @"1";
 builderBlock.property = @"name";
 }];
 
-NSString *filterItemNameString = [NSString filterItemStringWithBuilderBlock:^(ODataFilterItemStringBuilder *builderBlock) {
+NSString *filterItemNameString = [NSString filterItemWithBlock:^(ODataFilterItem *builderBlock) {
 builderBlock.name = @"name";
 builderBlock.comparisonOperator = @"eq";
 builderBlock.value = @"John";
 }];
 
-NSString *filterItemAgeString = [NSString filterItemStringWithBuilderBlock:^(ODataFilterItemStringBuilder *builderBlock) {
+NSString *filterItemAgeString = [NSString filterItemWithBlock:^(ODataFilterItem *builderBlock) {
 builderBlock.name = @"age";
 builderBlock.comparisonOperator = @"gt";
 builderBlock.value = @"21";
 }];
 
-NSString *filterItemSalaryString = [NSString filterItemStringWithBuilderBlock:^(ODataFilterItemStringBuilder *builderBlock) {
+NSString *filterItemSalaryString = [NSString filterItemWithBlock:^(ODataFilterItem *builderBlock) {
 builderBlock.name = @"salary";
 builderBlock.comparisonOperator = @"lt";
 builderBlock.value = @"50,000";
 }];
 
-NSString *filterItemRegionString = [NSString filterItemStringWithBuilderBlock:^(ODataFilterItemStringBuilder *builderBlock) {
+NSString *filterItemRegionString = [NSString filterItemWithBlock:^(ODataFilterItem *builderBlock) {
 builderBlock.name = @"region";
 builderBlock.comparisonOperator = @"eq";
 builderBlock.value = @"Asia";
 }];
 
-NSString *filterString = [NSString filterStringWithBuilderBlock:^(ODataFilterStringBuilder *builderBlock) {
+NSString *filterString = [NSString filterWithBlock:^(ODataFilter *builderBlock) {
 builderBlock.items = @[filterItemNameString, filterItemAgeString, filterItemSalaryString, filterItemRegionString];
 }];
 
-NSString *queryString = [NSString queryStringWithBuilderBlock:^(ODataQueryStringBuilder *builderBlock) {
+NSString *queryString = [NSString queryWithBlock:^(ODataQuery *builderBlock) {
 builderBlock.protocol = @"http";
 builderBlock.server = @"server";
 builderBlock.siteURL = @"siteurl";
@@ -89,7 +89,7 @@ builderBlock.select = @[@"name", @"surname", @"age"];
 }];
 
 
-http://server/siteurl/_vti_bin/ListData.svc/staff(1)/name?$select=name,surname,age&$filter=name%20eq%20%27John%27%20and%20age%20gt%20%2721%27%20and%20salary%20lt%20%2750,000%27%20and%20region%20eq%20%27Asia%27   
+staff(1)/name?$select=name,surname,age&$filter=name%20eq%20%27John%27%20and%20age%20gt%20%2721%27%20and%20salary%20lt%20%2750,000%27%20and%20region%20eq%20%27Asia%27   
 ```
 
 ## TODO
