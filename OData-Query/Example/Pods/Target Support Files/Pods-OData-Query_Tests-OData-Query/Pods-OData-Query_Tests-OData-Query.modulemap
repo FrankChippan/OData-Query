@@ -1,0 +1,6 @@
+framework module OData_Query {
+  umbrella header "Pods-OData-Query_Tests-OData-Query-umbrella.h"
+
+  export *
+  module * { export * }
+}
