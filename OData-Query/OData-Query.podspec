@@ -10,12 +10,9 @@
 Pod::Spec.new do |s|
   s.name             = "OData-Query"
   s.version          = "1.0"
-  s.summary          = "Library for creating OData formatted Sharepoint url paths."
+  s.summary          = "Library for creating OData formatted paths."
   s.description      = <<-DESC
-                       An optional longer description of OData-Query
-
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                        Create OData formatted Sharepoint url paths
                        DESC
   s.homepage         = "https://github.com/FrankChippan/OData-Query"
   s.license          = 'MIT'
